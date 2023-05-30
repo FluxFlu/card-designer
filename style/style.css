@@ -1,0 +1,66 @@
+body {
+    background-color: #22223b;
+}
+
+input, textarea, button {
+    background-color: #4a4e69;
+}
+
+input, textarea, button, h1, h2, p, label {
+    font-size: 2.5vh;
+    color: #9a8c98;
+    font-family: Monospace;
+}
+
+input {
+    margin: 0;
+    padding: 0;
+    margin-left: 25vw;
+    width: 16vw;
+    height: 5vh;
+}
+
+textarea {
+    margin-left: 25vw;
+    width: 25vw;
+    height: 10vh;
+}
+
+button {
+    margin-left: 25vw;
+    width: 8vw;
+    height: 5vh;
+}
+
+
+h1, h2, p {
+    padding-top: 3vh;
+    padding-bottom: 0vh;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 5vh;
+    text-align: center;
+}
+
+h2 {
+    padding-left: 25vw;
+}
+
+label {
+    font-weight: 900;
+    padding: 0;
+    margin: 0;
+}
+
+#result {
+    position: absolute;
+    background-color: #ddd;
+    width: 35vh;
+    height: 49vh;
+    left: 70vw;
+    top: 20vh;
+}
