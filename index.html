@@ -8,13 +8,18 @@
         <link rel="stylesheet" href="./style/style.css"/>
     </head>
     <body>
+        
+        <h2 style="position: absolute; margin: 0; padding: 0; top: 41vh; left: 10vw">Font Size: </h2>
+        <input type="input" id="oracle_size" value="120" onkeyup="create()" style="position: absolute; margin: 0; padding: 0; top: 44vh; left: 10vw; width: 4vw">
+        
+        
         <h1>Card Designer</h1>
         <br>
         <h2>Name: </h2>
         <input id="name" onkeyup="create()">
         <br>
         <h2>Cost</h2>
-        <input id="cost" onkeyup="create()"></input>
+        <input id="cost" onkeyup="create()">
         <br>
         <h2>Oracle: </h2>
         <textarea id="oracle" onkeyup="create()"> </textarea>
@@ -23,10 +28,10 @@
         <input id="art" onkeyup="create()">
         <br>
         <h2>Typeline</h2>
-        <input id="typeline" onkeyup="create()"></input>
+        <input id="typeline" onkeyup="create()">
         <br>
         <h2>Power / Toughness</h2>
-        <input id="p_t" onkeyup="create()"></input>
+        <input id="p_t" onkeyup="create()">
         <br><br><br>
         <input id="upload" type="file" onChange="upload()" name="Upload">
         <label for="Upload">Upload</label>
