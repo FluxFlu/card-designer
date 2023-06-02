@@ -1,6 +1,3 @@
-
-
-
 function downloadFile(filename, text) {
   const anchor = document.createElement('a');
   anchor.setAttribute('href', 'data: text/plain; charset=utf-8,' + encodeURIComponent(text));
@@ -20,6 +17,7 @@ const fields = [
     "name",
     "cost",
     "oracle",
+    "oracle_size",
     "art",
     "typeline",
     "p_t",
@@ -38,13 +36,13 @@ function createImage(url) {
 }
 
 function create() {
-    const { name, cost, oracle, art, typeline, p_t } = getFields();
+    const { name, cost, oracle_size, oracle, art, typeline, p_t } = getFields();
     const canvas = get("result");
     const ctx = canvas.getContext("2d");
     ctx.textAlign = "left";
     
     // Card background color
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = typeline.split(' ').map(e => e.trim().toLowerCase()).includes("token") ? "#c5c5c5" : "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Card outline
@@ -92,10 +90,11 @@ function create() {
     ctx.fillRect(0, 520 + canvasOutlineSize * 2 + artHeight, canvas.width, canvasOutlineSize);
     
     
-    ctx.font = "120px monospace";
+    ctx.font = oracle_size + "px monospace";
+    const oracleSpacing = 150 / 120 * oracle_size;
     // Oracle
     oracle.split('\n').forEach((line, index) =>
-        ctx.fillText(line, 100, 700 + canvasOutlineSize + artHeight + 150 * index)
+        ctx.fillText(line, 100, 550 + oracleSpacing + canvasOutlineSize + artHeight + oracleSpacing * index)
     );
     
     if (p_t) {
@@ -129,7 +128,7 @@ function genFileText() {
 
 function save() {
     const { name } = getFields();
-    downloadFile("card-" + name, genFileText());
+    downloadFile(name, genFileText());
 }
 
 function interpretFile(file) {
