@@ -21,11 +21,17 @@ const fields = [
     "art",
     "typeline",
     "p_t",
+    "artist",
+    "set_symbol",
 ];
 
 function getFields() {
     const out = {};
     fields.forEach(field => out[field] = get(field).value);
+    if (!out.artist || out.artist == "undefined")
+        out.artist = "Missy";
+    // if (!out.set_symbol || out.set_symbol == "undefined")
+    //     out.set_symbol = "α";
     return out;
 }
 
@@ -36,13 +42,14 @@ function createImage(url) {
 }
 
 function create() {
-    const { name, cost, oracle_size, oracle, art, typeline, p_t } = getFields();
+    const { name, cost, oracle_size, oracle, art, typeline, p_t, artist, set_symbol } = getFields();
     const canvas = get("result");
     const ctx = canvas.getContext("2d");
     ctx.textAlign = "left";
     
     // Card background color
-    ctx.fillStyle = typeline.split(' ').map(e => e.trim().toLowerCase()).includes("token") ? "#c5c5c5" : "#ffffff";
+    const backgroundColor = typeline.split(' ').map(e => e.trim().toLowerCase()).includes("token") ? "#c5c5c5" : "#ffffff";
+    ctx.fillStyle = backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Card outline
@@ -83,24 +90,58 @@ function create() {
     ctx.fillRect(0, 300 + canvasOutlineSize + artHeight, canvas.width, canvasOutlineSize);
     
     // Typeline
-    ctx.fillText(typeline, 100, 450 + canvasOutlineSize * 2 + artHeight);
+    
+    // Shrink the text until it fits on the box
+    let fontSize = 140;
+    while (ctx.measureText(typeline).width > canvas.width - canvasOutlineSize * 2 - 340) {
+        fontSize--;
+        ctx.font = fontSize + "px monospace";
+    }
+    
+    ctx.fillText(typeline, 100, 450 - (140 - fontSize) / 3 + canvasOutlineSize * 2 + artHeight);
     
     // Separation line for Typeline
     
     ctx.fillRect(0, 520 + canvasOutlineSize * 2 + artHeight, canvas.width, canvasOutlineSize);
+
+    // Set Symbol
+    if (set_symbol) {
+        ctx.font = "240px monospace";
+        ctx.fillStyle = "#ffffff";
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 8;
+        ctx.fillText(set_symbol, canvas.width - 200, 465 + canvasOutlineSize * 2 + artHeight)
+        // ctx.font = "240px monospace";
+        ctx.strokeText(set_symbol, canvas.width - 200, 465 + canvasOutlineSize * 2 + artHeight)
+        ctx.fillStyle = "#000000"
+    }
     
-    
+    // Oracle Font Size
     ctx.font = oracle_size + "px monospace";
     const oracleSpacing = 150 / 120 * oracle_size;
-    // Oracle
+    
+    // Card Text
     oracle.split('\n').forEach((line, index) =>
         ctx.fillText(line, 100, 550 + oracleSpacing + canvasOutlineSize + artHeight + oracleSpacing * index)
     );
     
+    // Artist Credit
+    ctx.font = "50px monospace";
+    ctx.fillRect(0, canvas.height - 70, canvas.width, canvasOutlineSize + 180);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillText("Artist: " + artist, canvasOutlineSize + 40, canvas.height - 20);
+    ctx.fillStyle = "#000000";
+    
+    // Power / Toughness
     if (p_t) {
         const [ power, toughness ] = p_t.split('/').map(e => e.trim());
         if (!power && power !== 0) return;
         if (!toughness && toughness !== 0) return;
+
+        // Cover up artist
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(canvas.width - 560, canvas.height - 340, 560 - canvasOutlineSize, 340 - canvasOutlineSize)
+        ctx.fillStyle = "#000000";
         
         // Draw the box
         ctx.fillRect(canvas.width - 560, canvas.height - 340, 560, canvasOutlineSize);

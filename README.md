@@ -11,9 +11,8 @@ Cards can be saved in a text format to allow them to be imported and editer late
  - Text
  - Art
  - Power / Toughness
-
-## Planned Features
  - Set Symbol
+ - Artist Credit
 
 ## Features that will likely never exist:
  - Custom card frames
