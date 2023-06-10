@@ -16,3 +16,7 @@ Cards can be saved in a text format to allow them to be imported and editer late
 
 ## Features that will likely never exist:
  - Custom card frames
+
+---
+## Notes:
+ - Text can be formatted by putting a '|' at the beginning of the line and then writing the formatting afterwards. It uses the same syntax as the [CSS font](https://developer.mozilla.org/en-US/docs/Web/CSS/font) specifier.
