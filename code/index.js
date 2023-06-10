@@ -121,10 +121,12 @@ function create() {
     const oracleSpacing = 150 / 120 * oracle_size;
     
     // Card Text
-    oracle.split('\n').forEach((line, index) => {
+    let index = 0;
+    oracle.split('\n').forEach(line => {
         if (line[0] == '|')
             return ctx.font = line.slice(1) + ' ' + oracle_size + "px monospace"
         ctx.fillText(line, 100, 550 + oracleSpacing + canvasOutlineSize + artHeight + oracleSpacing * index)
+        index++;
     });
     
     // Artist Credit
