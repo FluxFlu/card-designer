@@ -29,7 +29,7 @@ function getFields() {
     const out = {};
     fields.forEach(field => out[field] = get(field).value);
     if (!out.artist || out.artist == "undefined")
-        out.artist = "Missy";
+        out.artist = "";
     // if (!out.set_symbol || out.set_symbol == "undefined")
     //     out.set_symbol = "α";
     return out;
