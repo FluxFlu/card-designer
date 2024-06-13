@@ -133,7 +133,7 @@ function create() {
     ctx.font = "50px monospace";
     ctx.fillRect(0, canvas.height - 70, canvas.width, canvasOutlineSize + 180);
     ctx.fillStyle = "#ffffff";
-    ctx.fillText("Artist: " + artist, canvasOutlineSize + 40, canvas.height - 20);
+    ctx.fillText(artist && "Artist: " + artist, canvasOutlineSize + 40, canvas.height - 20);
     ctx.fillStyle = "#000000";
     
     // Power / Toughness
