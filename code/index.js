@@ -34,7 +34,7 @@ function setFontSize(size) {
 }
 
 
-const textHeightScaling = metrics => (metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent) * 0.8;
+const textHeightScaling = metrics => (metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent) * 1;
 
 function wrapText(ctx, str, width, height) {
     ctx.font = getFontSize() + "px monospace";
